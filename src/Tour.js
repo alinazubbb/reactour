@@ -194,7 +194,7 @@ function Tour({
 
       // step is outside view
       debugger
-      if (!inView({ ...nodeRect, w, h, threshold: inViewThreshold })) {
+      if (!inView(node)) {
         debugger
         const parentScroll = Scrollparent(node)
         const offset = scrollOffset

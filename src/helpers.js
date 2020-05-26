@@ -10,13 +10,33 @@ export function getNodeRect(node) {
   return { top, right, bottom, left, width, height }
 }
 
-export function inView({ top, right, bottom, left, w, h, threshold = 0 }) {
+// export function inView({ top, right, bottom, left, w, h, threshold = 0 }) {
+//   return (
+//     top >= 0 + threshold &&
+//     left >= 0 + threshold &&
+//     bottom <= h - threshold &&
+//     right <= w - threshold
+//   )
+// }
+
+export function inView(el) {
+  var top = el.offsetTop;
+  var left = el.offsetLeft;
+  var width = el.offsetWidth;
+  var height = el.offsetHeight;
+
+  while (el.offsetParent) {
+    el = el.offsetParent;
+    top += el.offsetTop;
+    left += el.offsetLeft;
+  }
+
   return (
-    top >= 0 + threshold &&
-    left >= 0 + threshold &&
-    bottom <= h - threshold &&
-    right <= w - threshold
-  )
+    top >= window.pageYOffset &&
+    left >= window.pageXOffset &&
+    (top + height) <= (window.pageYOffset + window.innerHeight) &&
+    (left + width) <= (window.pageXOffset + window.innerWidth)
+  );
 }
 
 export function isBody(node) {
