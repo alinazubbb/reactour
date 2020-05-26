@@ -193,15 +193,18 @@ function Tour({
       const nodeRect = getNodeRect(node)
 
       // step is outside view
-      debugger
       if (!inView(node)) {
-        debugger
         const parentScroll = Scrollparent(node)
+        console.log('parentScroll', parentScroll);
+        debugger
         const offset = scrollOffset
           ? scrollOffset
           : nodeRect.height > h
             ? -25
             : -(h / 2) + nodeRect.height / 2
+        console.log('offset', offset);
+        console.log('isBody(parentScroll) ? window : parentScroll', isBody(parentScroll) ? window : parentScroll);
+        console.log('getNodeRect(_node)', getNodeRect(_node));
         scrollSmooth.to(node, {
           context: isBody(parentScroll) ? window : parentScroll,
           duration: scrollDuration,
@@ -229,6 +232,8 @@ function Tour({
   }
 
   function makeCalculations(nodeRect, helperPosition) {
+    console.log('makeCalculations');
+    debugger
     const { w, h } = getWindow()
     const { width: helperWidth, height: helperHeight } = getNodeRect(
       helper.current
